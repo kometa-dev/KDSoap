@@ -157,7 +157,7 @@ public:
      * Used internally, and by server implementations that handle dynamic calls
      * \since 1.8
      */
-    void createFaultMessage(const QString &faultCode, const QString &faultText, KDSoap::SoapVersion soapVersion);
+    void createFaultMessage(const QString &faultCode, const QString &faultText, KDSoap::SoapVersion soapVersion, const QByteArray &data);
 
     /**
      * Attach to a KDSoapMessage the message addressing properties that will be written

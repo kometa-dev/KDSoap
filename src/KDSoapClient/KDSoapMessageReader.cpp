@@ -266,7 +266,7 @@ KDSoapMessageReader::XmlError KDSoapMessageReader::xmlToMessage(const QByteArray
                 .arg(QString::number(reader.lineNumber()),
                      QString::number(reader.columnNumber()),
                      reader.errorString());
-        pMsg->createFaultMessage(QString::number(reader.error()), faultText, soapVersion);
+        pMsg->createFaultMessage(QString::number(reader.error()), faultText, soapVersion, data);
         return reader.error() == QXmlStreamReader::PrematureEndOfDocumentError ? PrematureEndOfDocumentError : ParseError;
     }
 

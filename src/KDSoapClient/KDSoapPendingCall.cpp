@@ -206,9 +206,9 @@ void KDSoapPendingCall::Private::parseReply()
         if (!replyMessage.isFault()) {
             replyHeaders.clear();
             if (reply->error() == QNetworkReply::OperationCanceledError && reply->property("kdsoap_reply_timed_out").toBool()) // see KDSoapClientInterface.cpp
-                replyMessage.createFaultMessage(QString::number(QNetworkReply::TimeoutError), QLatin1String("Operation timed out"), soapVersion);
+                replyMessage.createFaultMessage(QString::number(QNetworkReply::TimeoutError), QLatin1String("Operation timed out"), soapVersion, data);
             else
-                replyMessage.createFaultMessage(QString::number(reply->error()), reply->errorString(), soapVersion);
+                replyMessage.createFaultMessage(QString::number(reply->error()), reply->errorString(), soapVersion, data);
         }
     }
 }

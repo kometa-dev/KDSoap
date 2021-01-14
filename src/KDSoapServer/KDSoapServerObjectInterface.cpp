@@ -71,7 +71,7 @@ void KDSoapServerObjectInterface::processRequest(const KDSoapMessage &request, K
     const QString method = request.name();
     qDebug() << "Slot not found:" << method << "[soapAction =" << soapAction << "]" /* << "in" << metaObject()->className()*/;
     const KDSoap::SoapVersion soapVersion = KDSoap::SOAP1_1; // TODO version selection on the server side
-    response.createFaultMessage(QString::fromLatin1("Server.MethodNotFound"), QString::fromLatin1("%1 not found").arg(method), soapVersion);
+    response.createFaultMessage(QString::fromLatin1("Server.MethodNotFound"), QString::fromLatin1("%1 not found").arg(method), soapVersion, QByteArray());
 }
 
 QIODevice *KDSoapServerObjectInterface::processFileRequest(const QString &path, QByteArray &contentType)
@@ -88,7 +88,7 @@ void KDSoapServerObjectInterface::processRequestWithPath(const KDSoapMessage &re
     qWarning("Invalid path: \"%s\"", qPrintable(path));
     //qWarning() << "Invalid path:" << path << "[method =" << method << "; soapAction =" << soapAction << "]" /* << "in" << metaObject()->className()*/;
     const KDSoap::SoapVersion soapVersion = KDSoap::SOAP1_1; // TODO version selection on the server side
-    response.createFaultMessage(QString::fromLatin1("Client.Data"), QString::fromLatin1("Method %1 not found in path %2").arg(method, path), soapVersion);
+    response.createFaultMessage(QString::fromLatin1("Client.Data"), QString::fromLatin1("Method %1 not found in path %2").arg(method, path), soapVersion, QByteArray());
 }
 
 KDSoapServerObjectInterface::HttpResponseHeaderItems KDSoapServerObjectInterface::additionalHttpResponseHeaderItems() const

@@ -158,7 +158,7 @@ void KDSoapMessage::setFault(bool fault)
     d->isFault = fault;
 }
 
-void KDSoapMessage::createFaultMessage(const QString &faultCode, const QString &faultText, KDSoap::SoapVersion soapVersion)
+void KDSoapMessage::createFaultMessage(const QString &faultCode, const QString &faultText, KDSoap::SoapVersion soapVersion, const QByteArray &data)
 {
     *this = KDSoapMessage();
     setName(QString::fromLatin1("Fault"));
@@ -171,6 +171,10 @@ void KDSoapMessage::createFaultMessage(const QString &faultCode, const QString &
         KDSoapValueList reasonValueList;
         reasonValueList.addArgument(QString::fromLatin1("Text"), faultText);
         addArgument(QString::fromLatin1("Reason"), reasonValueList);
+        KDSoapValueList dataValueList;
+        dataValueList.addArgument(QString::fromLatin1("Value"), data);
+        addArgument(QString::fromLatin1("Data"), dataValueList);
+
     } else {
         setNamespaceUri(KDSoapNamespaceManager::soapEnvelope());
         addArgument(QString::fromLatin1("faultcode"), faultCode);
